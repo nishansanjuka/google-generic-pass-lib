@@ -214,8 +214,15 @@ export class GoogleGenericPass {
       // Check if the input is a JSON string
       try {
         serviceAccountJson = JSON.parse(privateKeyPathOrJson);
-      } catch {
+      } catch (jsonError) {
         // If parsing fails, treat as file path
+        if (!fs.existsSync(privateKeyPathOrJson)) {
+          throw new Error(
+            `Invalid file path or malformed JSON: ${
+              jsonError instanceof Error ? jsonError.message : 'Unknown error'
+            }`,
+          );
+        }
         serviceAccountJson = JSON.parse(fs.readFileSync(privateKeyPathOrJson, 'utf8'));
       }
 
@@ -223,8 +230,7 @@ export class GoogleGenericPass {
       if (serviceAccountJson.private_key) {
         this.privateKey = serviceAccountJson.private_key;
       } else {
-        // If no private_key in JSON, try to read as direct PEM file
-        this.privateKey = fs.readFileSync(privateKeyPathOrJson, 'utf8');
+        throw new Error('Private key not found in the provided service account JSON.');
       }
     } catch (error) {
       throw new Error(
@@ -368,7 +374,8 @@ export class GoogleGenericPass {
       },
     };
 
-    if (subheader) {
+    if (subheader !== undefined) {
+      // Changed from if (subheader) to properly handle empty strings
       this.passObject.subheader = {
         defaultValue: {
           language: 'en-US',

@@ -9,3 +9,4 @@ tests/
 tsconfig.json
 jest.config.js
 *.log
+coverage/

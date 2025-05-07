@@ -1,6 +1,6 @@
 {
   "name": "wallet-pass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library for managing wallet passes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +13,9 @@
     "prebuild": "npm run clean",
     "prepublishOnly": "npm run build",
     "prepare": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [
     "wallet",
@@ -27,13 +29,16 @@
     "url": "https://github.com/yourusername/wallet-pass.git"
   },
   "dependencies": {
-    "jsonwebtoken": "^9.0.0",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^9.0.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.0",
     "@types/node": "^18.0.0",
+    "jest": "^29.7.0",
     "rimraf": "^3.0.2",
+    "ts-jest": "^29.3.2",
     "typescript": "^4.9.0"
   }
 }
