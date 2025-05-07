@@ -205,19 +205,26 @@ export class GoogleGenericPass {
   /**
    * Load service account credentials for JWT signing
    */
-  setServiceAccountCredentials(serviceAccountEmail: string, privateKeyPath: string): this {
+  setServiceAccountCredentials(serviceAccountEmail: string, privateKeyPathOrJson: string): this {
     this.serviceAccountEmail = serviceAccountEmail;
 
     try {
-      // Read the service account JSON file
-      const serviceAccountJson = JSON.parse(fs.readFileSync(privateKeyPath, 'utf8'));
+      let serviceAccountJson;
 
-      // Extract the private key from the JSON file
+      // Check if the input is a JSON string
+      try {
+        serviceAccountJson = JSON.parse(privateKeyPathOrJson);
+      } catch {
+        // If parsing fails, treat as file path
+        serviceAccountJson = JSON.parse(fs.readFileSync(privateKeyPathOrJson, 'utf8'));
+      }
+
+      // Extract the private key from the JSON
       if (serviceAccountJson.private_key) {
         this.privateKey = serviceAccountJson.private_key;
       } else {
-        // If it's a direct PEM file, use it as is
-        this.privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+        // If no private_key in JSON, try to read as direct PEM file
+        this.privateKey = fs.readFileSync(privateKeyPathOrJson, 'utf8');
       }
     } catch (error) {
       throw new Error(
