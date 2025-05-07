@@ -1,3 +1,20 @@
+# wallet-pass
+
+A library for managing wallet passes.
+
+## Installation
+
+```bash
+npm install wallet-pass
+```
+
+## Usage
+
+```javascript
+const walletPass = require('wallet-pass');
+// Your usage examples here
+```
+
 # Wallet Pass
 
 A TypeScript library for generating Google Wallet passes.

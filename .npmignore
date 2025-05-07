@@ -1,5 +1,11 @@
-src/
-tsconfig.json
-.npmignore
-*.log
 node_modules/
+src/
+tests/
+.git/
+.github/
+.gitignore
+.eslintrc
+.prettierrc
+tsconfig.json
+jest.config.js
+*.log
