@@ -1,6 +1,6 @@
 {
   "name": "wallet-pass",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A library for managing wallet passes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/wallet-pass.git"
+    "url": "https://github.com/nishansanjuka/google-generic-pass-lib.git"
   },
   "dependencies": {
     "fs": "0.0.1-security",
